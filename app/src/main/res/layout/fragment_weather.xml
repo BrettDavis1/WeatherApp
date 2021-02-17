@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".WeatherFragment">
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_city"
+        android:textAppearance="?textAppearanceHeadline3"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="City"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_weather_type"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_weather_type"
+        android:textAppearance="?textAppearanceBody1"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Weather Type"
+        app:layout_constraintTop_toBottomOf="@id/tv_city"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_degree" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_degree"
+        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="00"
+        android:textAppearance="?textAppearanceHeadline1"
+        app:layout_constraintTop_toBottomOf="@id/tv_weather_type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_high"
+        />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_high"
+        android:textAppearance="?textAppearanceBody1"
+        android:gravity="end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="H: XX"
+        app:layout_constraintTop_toBottomOf="@id/tv_degree"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_low"
+        app:layout_constraintBottom_toTopOf="@id/tv_national_weather_service" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_low"
+        android:textAppearance="?textAppearanceBody1"
+        android:layout_marginStart="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="L: XX"
+        app:layout_constraintTop_toBottomOf="@id/tv_degree"
+        app:layout_constraintStart_toEndOf="@id/tv_high"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tv_national_weather_service"/>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_national_weather_service"
+        android:textAppearance="?textAppearanceBody1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="National weather service"
+        app:layout_constraintTop_toBottomOf="@id/tv_low"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_hourly" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_hourly"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/hourly_item"
+        app:layout_constraintTop_toBottomOf="@id/tv_national_weather_service"
+        app:layout_constraintBottom_toTopOf="@id/rv_daily"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_daily"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:listitem="@layout/daily_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_hourly"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
