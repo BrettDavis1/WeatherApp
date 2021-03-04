@@ -1,25 +1,27 @@
 package com.example.weatherapp.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.model.AllWeather
-import com.example.weatherapp.model.NameWeather
-import com.example.weatherapp.repo.AllWeatherRepo
+import android.app.Application
+import android.content.Context
+import android.util.Log
+import androidx.activity.viewModels
+import androidx.lifecycle.*
+import com.example.weather_model.AllWeatherRepo
+import com.example.weather_model.model.AllWeather
+import com.example.weather_model.model.NameWeather
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WeatherFragmentViewModel : ViewModel() {
+class WeatherFragmentViewModel(application: Application) : AndroidViewModel(application) {
     private val _weather = MutableLiveData<AllWeather>()
     val weather: LiveData<AllWeather> get() = _weather
 
     private val _nameWeather = MutableLiveData<NameWeather>()
     val nameWeather: LiveData<NameWeather> get() = _nameWeather
-
-    fun getWeather() {
+    //only fetch data from api every 10 minutes
+    fun getWeather(context: Context, lat: Double, lon: Double) {
         viewModelScope.launch(Dispatchers.IO) {
-            val allWeather = AllWeatherRepo.allWeatherService.getAllWeather()
+            val allWeather = AllWeatherRepo.getAllWeather(getApplication(), lat, lon)
+            Log.d("WEATHERFRAGMODEL", "getWeather data: $allWeather")
             _weather.postValue(allWeather)
         }
     }

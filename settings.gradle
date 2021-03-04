@@ -1,2 +1,4 @@
+include ':weather'
+include ':weather_model'
 include ':app'
 rootProject.name = "WeatherApp"

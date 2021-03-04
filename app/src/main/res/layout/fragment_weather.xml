@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".WeatherFragment">
+    tools:context=".WeatherFragment"
+    android:background="@color/rain_baby_blue">
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_city"
         android:textAppearance="?textAppearanceHeadline3"
@@ -70,25 +71,32 @@
         app:layout_constraintTop_toBottomOf="@id/tv_low"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rv_hourly" />
+        app:layout_constraintBottom_toTopOf="@id/rv_hourly"
+        android:paddingBottom="10dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hourly"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         tools:listitem="@layout/hourly_item"
         app:layout_constraintTop_toBottomOf="@id/tv_national_weather_service"
         app:layout_constraintBottom_toTopOf="@id/rv_daily"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:orientation="horizontal"
+        tools:layoutManager="LinearLayoutManager"
+        android:paddingBottom="50dp"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_daily"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        tools:listitem="@layout/daily_item"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rv_hourly"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rv_hourly"
+        tools:listitem="@layout/daily_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.weather_model.model.Hourly
 import com.example.weatherapp.databinding.HourlyItemBinding
-import com.example.weatherapp.model.Hourly
 import java.util.*
 
 class HourlyWeatherAdapter(val hourlyWeather: List<Hourly>):
@@ -29,9 +29,9 @@ class HourlyWeatherAdapter(val hourlyWeather: List<Hourly>):
     class HourlyWeatherHolder(val binding: HourlyItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun setHourly(hourly: Hourly) {
             //°
-            binding.tvDegree.text = "${hourly.temp}°"
+            binding.tvDegree.text = String.format("%d°", hourly.temp?.toInt())//"${hourly.temp}°"
             if(hourly.pop != 0.0) {
-                binding.tvRain.text = "${(hourly.pop?.times(100))?.toInt()}%"
+                binding.tvRain.text = String.format("%d%%", hourly.pop?.times(100)?.toInt())//"${(hourly.pop?.times(100))?.toInt()}%"
             }
             binding.tvTime.text = hourly.dt?.let { getHour(it) }
             Glide.with(this.itemView)

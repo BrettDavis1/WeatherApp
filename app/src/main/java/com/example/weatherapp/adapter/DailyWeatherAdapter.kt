@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.weatherapp.databinding.DailyItemBinding
-import com.example.weatherapp.model.Daily
+import com.example.weather_model.model.Daily
 import java.util.*
+import kotlin.math.roundToInt
 
 class DailyWeatherAdapter(val dailyWeather: List<Daily>):
     RecyclerView.Adapter<DailyWeatherAdapter.DailyWeatherHolder>(){
@@ -31,7 +32,7 @@ class DailyWeatherAdapter(val dailyWeather: List<Daily>):
             binding.tvHigh.text = "${daily.temp?.max}"
             binding.tvLow.text = "${daily.temp?.min}"
             if(daily.pop != 0.0) {
-                binding.tvRain.text = "${((daily.pop)?.times(100))?.toInt()}%"
+                binding.tvRain.text = String.format("%d%%", (daily.pop?.times(100))?.roundToInt())//"${((daily.pop)?.times(100))?.toInt()}%"
             }
             binding.tvDay.text = daily.dt?.let { getDay(it) }
             Glide.with(binding.root.context)
