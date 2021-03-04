@@ -3,6 +3,8 @@ package com.example.weather_model.local.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.weather_model.model.AllWeather
+import dagger.Provides
+import javax.inject.Singleton
 
 @Dao
 interface AllWeatherDao {

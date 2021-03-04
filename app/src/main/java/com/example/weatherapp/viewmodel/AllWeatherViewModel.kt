@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.weather_model.local.dao.AllWeatherDao
 import com.example.weather_model.model.AllWeather
 import com.example.weatherapp.repo.local.WeatherDatabase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

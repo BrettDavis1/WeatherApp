@@ -6,12 +6,16 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.example.weather_model.AllWeatherRepo
+import com.example.weather_model.AllWeatherRepoHilt
 import com.example.weather_model.model.AllWeather
 import com.example.weather_model.model.NameWeather
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class WeatherFragmentViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class WeatherFragmentViewModel @Inject constructor(private val repo: AllWeatherRepoHilt) : ViewModel() {
     private val _weather = MutableLiveData<AllWeather>()
     val weather: LiveData<AllWeather> get() = _weather
 
@@ -20,20 +24,20 @@ class WeatherFragmentViewModel(application: Application) : AndroidViewModel(appl
     //only fetch data from api every 10 minutes
     fun getWeather(context: Context, lat: Double, lon: Double) {
         viewModelScope.launch(Dispatchers.IO) {
-            val allWeather = AllWeatherRepo.getAllWeather(getApplication(), lat, lon)
+            val allWeather = repo.getAllWeather(context, lat, lon)
             Log.d("WEATHERFRAGMODEL", "getWeather data: $allWeather")
             _weather.postValue(allWeather)
         }
     }
     fun getWeatherLatLon(lat: Double, lon: Double) {
         viewModelScope.launch(Dispatchers.IO) {
-            val allWeather = AllWeatherRepo.allWeatherService.getAllWeatherLatLon(lat, lon)
+            val allWeather = repo.getAllWeather(lat, lon)
             _weather.postValue(allWeather)
         }
     }
     fun getNameWeather() {
         viewModelScope.launch(Dispatchers.IO) {
-            val myNameWeather = AllWeatherRepo.allWeatherService.getNameWeather()
+            val myNameWeather = repo.getNameWeather()
             _nameWeather.postValue(myNameWeather)
         }
     }

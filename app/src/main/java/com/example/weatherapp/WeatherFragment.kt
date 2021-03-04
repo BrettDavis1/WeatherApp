@@ -12,8 +12,9 @@ import com.example.weatherapp.adapter.HourlyWeatherAdapter
 import com.example.weatherapp.databinding.FragmentWeatherBinding
 import com.example.weatherapp.viewmodel.WeatherFragmentViewModel
 import com.example.weather_model.BuildConfig
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-
+@AndroidEntryPoint
 class WeatherFragment : Fragment() {
    private lateinit var binding: FragmentWeatherBinding
     private val viewModel by viewModels<WeatherFragmentViewModel>()
