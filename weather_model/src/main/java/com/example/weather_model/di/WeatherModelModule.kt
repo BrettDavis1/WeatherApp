@@ -1,8 +1,10 @@
 package com.example.weather_model.di
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
 import com.example.weather_model.AllWeatherRepoHilt
+import com.example.weather_model.local.dao.AllWeatherDao
 import com.example.weatherapp.repo.local.WeatherDatabase
 import dagger.Module
 import dagger.Provides
@@ -19,12 +21,16 @@ object WeatherModelModule {
 
     @Provides
     @Singleton
-    fun provideWeatherDb(@ApplicationContext context: Context) = Room.databaseBuilder(
+    fun provideWeatherDb(@ApplicationContext context: Context): WeatherDatabase = Room.databaseBuilder(
         context.applicationContext,WeatherDatabase::class.java, DB_NAME
     ).build()
 
     @Provides
     @Singleton
-    fun provideSharedPref(@ApplicationContext context: Context) = context.getSharedPreferences(
+    fun providesWeatherDao(weatherDb: WeatherDatabase): AllWeatherDao = weatherDb.allWeatherDao()
+
+    @Provides
+    @Singleton
+    fun provideSharedPref(@ApplicationContext context: Context): SharedPreferences = context.getSharedPreferences(
         AllWeatherRepoHilt.TIMESTAMP_PREF, Context.MODE_PRIVATE)
 }
